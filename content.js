@@ -138,7 +138,7 @@ function loadBlockedPage() {
       <p id="saveStatus">Type a message for yourself.</p>
       <div id="createdBy">
         <p>Made by <a id="authorLink" href="https://jaehayi.com">Jaeha Yi</a> in 2023</p>
-        <p><a id="authorLink" href="https://jaehayi.com">github repo</a></p>
+        <p><a id="authorLink" href="https://github.com/jaehayi25/lotus.git">github repo</a></p>
       </div>
     </body>
     </html>`
