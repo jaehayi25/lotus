@@ -1,12 +1,11 @@
-// popup.js
 document.addEventListener("DOMContentLoaded", function () {
-    const storePageButton = document.getElementById("storePageButton");
+    const blockPageButton = document.getElementById("blockPageButton");
     const pageList = document.getElementById("pageList");
     const pageUrlsList = document.getElementById("pageUrls");
   
-    // Function to update the list of stored pages in the popup
+    // Function to update the list of blocked pages in the popup
     function updatePageList() {
-      // Retrieve the stored pages from storage
+      // Retrieve the blocked pages from storage
       chrome.storage.local.get({ pages: [] }, function (result) {
         const pages = result.pages;
   
@@ -36,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
   
-        // Add each stored page with its icon to the list
+        // Add each blocked page with its icon to the list
         pages.forEach(function (pageUrl) {
             const listItem = document.createElement("span");
-            const urlText = document.createElement("span");
+            const urlText = document.createElement("p");
             const removeButton = document.createElement("button")
             urlText.textContent = pageUrl;
             
@@ -55,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
             listItem.appendChild(removeButton);
             pageUrlsList.appendChild(listItem);
         });
-  
-        // Show the list of stored pages if there are any, otherwise hide it
+        
+        // Show the list of blocked pages if there are any, otherwise hide it
         if (pages.length > 0) {
           pageList.style.display = "block";
         } else {
@@ -68,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial update of the page list when the popup opens
     updatePageList();
   
-    // Click event handler for the "Store Current Page" button
-    storePageButton.addEventListener("click", function () {
+    // Click event handler for the "Block Current Page" button
+    blockPageButton.addEventListener("click", function () {
       // Get the current tab's URL
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         const currentPageUrl = tabs[0].url;
@@ -90,6 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
             updatePageList();
           });
         });
+
+        // Reload the active tab
+        chrome.tabs.reload(tabs[0].id); 
       });
     });
   });

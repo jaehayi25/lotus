@@ -1,9 +1,6 @@
-// content.js
-
 // Function to check if a URL is blocked
 function isBlocked(url, blockedUrls) {
     return blockedUrls.some((blockedUrl) => {
-        // You can implement custom matching logic here, e.g., exact match or domain match
         return url.includes(blockedUrl);
     });
 }
@@ -14,7 +11,7 @@ function loadCustomHtml() {
     chrome.storage.local.get({ customHtml: "" }, function (result) {
         const savedHtmlContent = result.customHtml;
         
-        // Inject the saved HTML content into a specific element (e.g., with id "myDiv")
+        // Inject the saved HTML content into a specific element 
         document.getElementById("customHtml").innerHTML = savedHtmlContent;
 
         const textarea = document.getElementById("customHtml");
@@ -35,7 +32,7 @@ function saveCustomHtml() {
     });
 }
 
-var saveTimeout = 3000; 
+var saveTimeout; 
 var saveStatus; 
 function handleInput() {
     // Clear the existing timeout (if any)
@@ -47,14 +44,14 @@ function handleInput() {
     saveTimeout = setTimeout(function () {
         saveCustomHtml();
         if (saveStatus) saveStatus.textContent = "Saved.";
-      }, 3000); // Adjust the delay as needed (3 seconds in this example)
+      }, 3000); 
 }
 
 function loadBlockedPage() {
     newHTML = `<!DOCTYPE html>
     <html>
     <head>
-      <title>Lotus - Site Blocker</title>
+      <title>lotus</title>
       <style>
         /* Center all elements in the body */
         body {
@@ -72,39 +69,83 @@ function loadBlockedPage() {
         /* Style for the header */
         h1 {
           font-size: 24px;
-        }
-    
-        /* Style for the textarea and button */
-        #customHtml,
-        #saveButton {
-          margin-top: 10px;
+          margin: 0; 
+          padding: 0; 
+          font-family: Garamond, serif;
         }
 
+        h4 {
+            font-size: 16px; 
+            margin-top: 6px; 
+            padding: 0;
+            color: #DCDCDC;  
+            font-family: Verdana, sans-serif;
+        }
+
+        .header-container {
+            display: flex; /* Use Flexbox for horizontal layout */
+            flex-direction: column; /* Stack h1 and h4 vertically */
+            align-items: center; /* Center horizontally */
+            margin-bottom: 10px; /* Add spacing between header and textarea */
+        }
+        
         #customHtml {
+            margin-top: 10px;
             background-color: transparent;
             color: white;
             border: none;
             outline: none;
             font-size: 18px; 
+            font-family: Verdana, sans-serif;
+        }
+
+        #saveStatus {
+            font-size: 16px; 
+            font-family: Verdana, sans-serif;
+        }
+
+        #createdBy {
+            position: absolute; 
+            bottom: 40px; 
+            left: 0; 
+            right: 0; 
+            text-align: center; 
+            font-size: 14px; 
+            color: #DCDCDC; 
+            font-family: Verdana, sans-serif;
+        }
+
+        #createdBy p {
+            margin: 6px; 
+            padding: 0; 
+        }
+
+        #authorLink {
+            color: #DCDCDC;
+            text-decoration: underline; 
+            cursor: pointer; 
         }
       </style>
       <script src="content.js"></script>
     </head>
     <body>
-      <img src="chrome-extension://fnjopognibfjmgdbloencjjiccggoaob/images/logo.png" alt="lotus logo" width="200" height="200">
-      <h1>Lotus</h1>
+      <img src="chrome-extension://igpmijcgjjaijipedegongbgbldhacje/images/logo.png" alt="lotus logo" width="200" height="200">
+      <div class="header-container">
+        <h1>lotus</h1>
+        <h4>a site blocker to help you focus.</h4>
+      </div>
       <textarea id="customHtml" rows="10" cols="50"></textarea><br>
-      <button id="saveButton">Save</button>
-      <p id="saveStatus">Type to edit</p>
+      <p id="saveStatus">Type a message for yourself.</p>
+      <div id="createdBy">
+        <p>Made by <a id="authorLink" href="https://jaehayi.com">Jaeha Yi</a> in 2023</p>
+        <p><a id="authorLink" href="https://jaehayi.com">github repo</a></p>
+      </div>
     </body>
     </html>`
 
     document.open()
     document.write(newHTML)
     document.close()
-
-    const button = document.getElementById("saveButton"); 
-    button.addEventListener("click", saveCustomHtml);
 
     const textarea = document.getElementById("customHtml");
     // Attach input event listener to the textarea to detect user input

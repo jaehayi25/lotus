@@ -2,11 +2,53 @@
 <head>
   <title>Lotus - Site Blocker</title>
   <script src="popup.js"></script>
+  <style>
+    /* Style for the pageUrls list */
+    h2 {
+      font-size: 16px;
+      font-family: Verdana, sans-serif;
+    }
+
+    #pageUrls {
+      list-style: none; /* Remove default list bullets */
+      padding: 0; 
+    }
+
+    /* Style for each listItem */
+    #pageUrls span {
+      display: flex; /* Use Flexbox to arrange children horizontally */
+      align-items: center; 
+      margin-bottom: 8px; 
+    }
+
+    /* Style for the favicon */
+    #pageUrls span img {
+      margin-right: 10px; /* Add spacing between favicon and urlText (adjust as needed) */
+      width: 16px; 
+      height: 16px; 
+    }
+
+    /* Style for the urlText*/
+    #pageUrls span p {
+      margin: 0; /* Remove default margin */
+      font-family: Verdana, sans-serif;
+    }
+
+    /* Style for the remove button */
+    #pageUrls span button {
+      background-color: transparent; 
+      border: none; 
+      color: red; 
+      cursor: pointer; 
+      font-size: 14px;
+      font-family: Verdana, sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <button id="storePageButton">Store Current Page</button>
+  <button id="blockPageButton">Block Current Page</button>
   <div id="pageList">
-    <h2>Stored Pages:</h2>
+    <h2>Blocked Pages</h2>
     <ul id="pageUrls"></ul>
   </div>
 </body>

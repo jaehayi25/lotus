@@ -21,7 +21,7 @@
     ],
     "web_accessible_resources": [ 
         {
-            "resources": ["options.html", "images/logo.png"], 
+            "resources": ["images/logo.png"], 
             "matches": ["<all_urls>"]
         }
     ],
@@ -36,4 +36,4 @@
         "extension_pages": "script-src 'self'; object-src 'self';", 
         "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
     }
-  }
+}
